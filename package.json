@@ -1,0 +1,33 @@
+{
+  "name": "picker-packer-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cross-Platform Warehouse Operations System - Mobile App for Picker-Packers, Web Dashboard for ASM/Admin, and Backend API",
+  "workspaces": [
+    "backend",
+    "mobile",
+    "web",
+    "shared"
+  ],
+  "scripts": {
+    "dev:backend": "yarn workspace @pp/backend dev",
+    "dev:mobile": "yarn workspace @pp/mobile start",
+    "dev:web": "yarn workspace @pp/web dev",
+    "dev:all": "concurrently \"yarn dev:backend\" \"yarn dev:mobile\" \"yarn dev:web\"",
+    "build": "yarn workspace @pp/backend build && yarn workspace @pp/web build && yarn workspace @pp/mobile build",
+    "test": "yarn workspaces foreach run test",
+    "lint": "yarn workspaces foreach run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "clean": "yarn workspaces foreach run clean"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "concurrently": "^8.2.2",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "yarn": ">=1.22.0"
+  }
+}

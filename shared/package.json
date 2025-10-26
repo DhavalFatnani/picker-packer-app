@@ -1,0 +1,15 @@
+{
+  "name": "@pp/shared",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "echo \"No tests in shared workspace\"",
+    "lint": "echo \"No lint in shared workspace\""
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

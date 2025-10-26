@@ -1,0 +1,146 @@
+# Cursor Rules for PickerPacker Warehouse Operations System
+
+## TypeScript Best Practices
+- Use strict TypeScript mode with `strict: true` in all tsconfig files
+- Prefer `interface` over `type` for object shapes (better error messages, extensibility)
+- Use `type` for unions, intersections, and utility types
+- Always define explicit return types for functions
+- Use `const` assertions for literal types
+- Avoid `any` - use `unknown` or proper types instead
+- Use discriminated unions for complex state management
+
+## Code Organization
+- One component/class per file (except tightly coupled helpers)
+- Group related files in feature folders (colocation principle)
+- Use barrel exports (`index.ts`) for clean imports
+- Keep files under 300 lines - refactor if larger
+- Separate business logic from UI components
+
+## Naming Conventions
+- PascalCase: Components, Classes, Types, Interfaces, Enums
+- camelCase: Functions, variables, methods, properties
+- UPPER_SNAKE_CASE: Constants, environment variables
+- Prefix interfaces with descriptive nouns (e.g., `User`, not `IUser`)
+- Prefix boolean variables with `is`, `has`, `should` (e.g., `isLoading`, `hasError`)
+- Use descriptive names - avoid abbreviations unless universally known
+
+## Function Design
+- Keep functions pure when possible (no side effects)
+- Single Responsibility Principle - one function, one purpose
+- Max 4 parameters - use object destructuring for more
+- Early returns for guard clauses
+- Avoid nested callbacks - use async/await
+- Extract complex conditions into named boolean variables
+
+## Comments & Documentation
+- Write self-documenting code - names should explain intent
+- Add JSDoc comments for:
+  - All exported functions, classes, and types
+  - Complex algorithms or business logic
+  - Non-obvious workarounds or hacks
+- Inline comments only for "why", not "what"
+- Keep comments up-to-date with code changes
+- Use TODO/FIXME/NOTE prefixes for action items
+
+## Error Handling
+- Never silently catch errors - always log or handle
+- Use custom error classes for domain-specific errors
+- Provide context in error messages (what failed, why, how to fix)
+- Validate inputs at boundaries (API endpoints, function entry points)
+- Use Result/Either pattern for expected failures
+- Fail fast - validate early, return early
+
+## React/React Native Best Practices
+- Use functional components with hooks (no class components)
+- Keep components small and focused (< 150 lines)
+- Extract custom hooks for reusable logic
+- Use `React.memo` for expensive components
+- Avoid inline function definitions in JSX (use `useCallback`)
+- Destructure props at function signature
+- Use proper key props in lists (stable, unique identifiers)
+- Separate container (logic) from presentational (UI) components
+
+## Performance
+- Lazy load routes and heavy components
+- Memoize expensive computations with `useMemo`
+- Debounce user inputs (search, autocomplete)
+- Paginate large lists - avoid rendering 1000+ items
+- Use proper database indexes for frequently queried fields
+- Avoid N+1 queries - use joins or batch loading
+- Profile before optimizing - measure, don't guess
+
+## Security
+- Sanitize all user inputs
+- Use parameterized queries (never string concatenation)
+- Validate on both client and server
+- Never log sensitive data (passwords, tokens, PII)
+- Use environment variables for secrets
+- Implement rate limiting on API endpoints
+- Use HTTPS only in production
+
+## Testing
+- Write tests for business logic and utilities (high value)
+- Test edge cases and error paths
+- Use descriptive test names: `should [expected behavior] when [condition]`
+- Arrange-Act-Assert pattern for test structure
+- Mock external dependencies (APIs, databases)
+- Avoid testing implementation details - test behavior
+
+## Git Commit Messages
+- Format: `type(scope): subject` (e.g., `feat(auth): add PIN login`)
+- Types: feat, fix, docs, style, refactor, test, chore
+- Keep subject under 72 characters
+- Use imperative mood ("add" not "added")
+
+## Code Review Checklist
+- Does it follow the single responsibility principle?
+- Are there any code smells (duplications, long functions)?
+- Is error handling comprehensive?
+- Are edge cases covered?
+- Is it tested adequately?
+- Is it documented where necessary?
+- Does it follow project conventions?
+
+## Import Organization
+- Group imports: external packages → internal modules → relative imports
+- Sort alphabetically within groups
+- Use absolute imports for shared code (`@shared/types`)
+- Avoid circular dependencies
+
+## Async Patterns
+- Prefer async/await over promises chains
+- Handle loading, error, and success states
+- Use Promise.all for parallel operations
+- Implement timeouts for network requests
+- Add retry logic with exponential backoff
+
+## Database Patterns
+- Use transactions for multi-step operations
+- Add indexes on foreign keys and frequently queried columns
+- Use prepared statements for repeated queries
+- Implement soft deletes (deleted_at) for audit trails
+- Version critical records (version column)
+
+## API Design
+- RESTful conventions: GET (read), POST (create), PUT/PATCH (update), DELETE (remove)
+- Use plural nouns for resources (`/users`, not `/user`)
+- Nest resources logically (`/tasks/:id/items`)
+- Return consistent error format with error codes
+- Include pagination metadata (total, page, limit)
+- Version API endpoints (`/api/v1/...`)
+
+## Mobile-Specific
+- Handle permission denials gracefully
+- Implement offline-first with optimistic updates
+- Show loading states for async operations
+- Use platform-specific UI patterns (iOS vs Android)
+- Test on both platforms and multiple screen sizes
+- Minimize bundle size - use dynamic imports
+
+## Accessibility
+- Use semantic HTML elements
+- Add ARIA labels for screen readers
+- Ensure keyboard navigation works
+- Maintain color contrast ratios (WCAG AA)
+- Provide text alternatives for images
+- Test with screen readers
